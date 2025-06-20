@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"strings"
@@ -27,10 +28,31 @@ func executor(s string) {
 }
 
 func main() {
-	p := prompt.New(
-		executor,
-		func(d prompt.Document) []prompt.Suggest { return []prompt.Suggest{} },
-		prompt.OptionPrefix("calculator> "),
-	)
-	p.Run()
+	flag.Usage = func() {
+		w := flag.CommandLine.Output()
+		fmt.Fprintf(w, "Command mode usage: %s \"expression\"\n", os.Args[0])
+		fmt.Fprintf(w, "Example: %s \"(2.5 - 1.35) * 2.0\"\n", os.Args[0])
+		fmt.Fprintf(w, "REPL usage: %s\n", os.Args[0])
+		flag.PrintDefaults()
+	}
+	flag.Parse()
+
+	if len(os.Args) == 1 {
+		p := prompt.New(
+			executor,
+			func(_ prompt.Document) []prompt.Suggest { return []prompt.Suggest{} },
+			prompt.OptionPrefix("calculator> "),
+		)
+		p.Run()
+	} else {
+		expression := os.Args[1]
+
+		result, err := calculator.Calculate(expression)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
+			os.Exit(1)
+		}
+
+		fmt.Printf("%v\n", result)
+	}
 }
