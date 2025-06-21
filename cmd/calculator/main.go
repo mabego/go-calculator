@@ -35,24 +35,25 @@ func main() {
 		fmt.Fprintf(w, "REPL usage: %s\n", os.Args[0])
 		flag.PrintDefaults()
 	}
-	flag.Parse()
 
-	if len(os.Args) == 1 {
+	switch {
+	case len(os.Args) == 1:
 		p := prompt.New(
 			executor,
 			func(_ prompt.Document) []prompt.Suggest { return []prompt.Suggest{} },
 			prompt.OptionPrefix("calculator> "),
 		)
 		p.Run()
-	} else {
+	case os.Args[1] == "-h" || os.Args[1] == "--help":
+		// Run flag.Parse only for help flags to allow command mode expressions to begin with a negative `-`.
+		flag.Parse()
+	default:
 		expression := os.Args[1]
-
 		result, err := calculator.Calculate(expression)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)
 		}
-
 		fmt.Printf("%v\n", result)
 	}
 }
