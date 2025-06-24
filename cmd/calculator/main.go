@@ -19,7 +19,9 @@ func executor(s string) {
 		os.Exit(0)
 	}
 
-	val, err := calculator.Calculate(s)
+	calc := calculator.New()
+
+	val, err := calc.Calculate(s)
 	if err == nil {
 		fmt.Printf("%v\n", val)
 	} else {
@@ -48,8 +50,9 @@ func main() {
 		// Run flag.Parse only for help flags to allow command mode expressions to begin with a negative `-`.
 		flag.Parse()
 	default:
+		calc := calculator.New()
 		expression := os.Args[1]
-		result, err := calculator.Calculate(expression)
+		result, err := calc.Calculate(expression)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 			os.Exit(1)

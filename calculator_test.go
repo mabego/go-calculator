@@ -52,9 +52,11 @@ func TestCalculation(t *testing.T) {
 
 		{"fma(1.2, 2.3, 4.5)", math.FMA(1.2, 2.3, 4.5)},
 	}
+
+	calc := New()
 	for _, tt := range tests {
 		t.Run(tt.in, func(t *testing.T) {
-			val, err := Calculate(tt.in)
+			val, err := calc.Calculate(tt.in)
 			if assert.NoError(t, err) {
 				assert.InDelta(t, tt.out, val, 0.001)
 			}
@@ -63,7 +65,8 @@ func TestCalculation(t *testing.T) {
 }
 
 func TestNan(t *testing.T) {
-	val, err := Calculate("nan()")
+	calc := New()
+	val, err := calc.Calculate("nan()")
 	if assert.NoError(t, err) {
 		assert.True(t, math.IsNaN(val))
 	}
