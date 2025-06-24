@@ -13,3 +13,13 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Go workspace file
+go.work
+
+# Local GoLand workspace files
+**/.idea/
+
+# Local environment variables
+*.env
+*.env.build
