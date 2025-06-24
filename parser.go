@@ -29,12 +29,13 @@ type node struct {
 }
 
 type parser struct {
-	tokens []token
-	i      int
+	tokens    []token
+	i         int
+	functions map[string]any
 }
 
-func newParser(tokens []token) *parser {
-	return &parser{tokens: tokens, i: 0}
+func newParser(tokens []token, functions map[string]any) *parser {
+	return &parser{tokens: tokens, i: 0, functions: functions}
 }
 
 func (p *parser) numberNode() (*node, error) {
@@ -70,8 +71,8 @@ func (p *parser) constantNode(str string) (*node, error) {
 	return &node{kind: numNode, val: val}, nil
 }
 
-func argumentNumber(funcName string) (int, error) {
-	f, ok := functions[funcName]
+func (p *parser) argumentNumber(funcName string) (int, error) {
+	f, ok := p.functions[funcName]
 	if !ok {
 		return 0, fmt.Errorf("unknown function: %s", funcName)
 	}
@@ -92,7 +93,7 @@ func argumentNumber(funcName string) (int, error) {
 
 func (p *parser) functionNode(str string) (*node, error) {
 	funcName := strings.ToLower(str)
-	num, err := argumentNumber(funcName)
+	num, err := p.argumentNumber(funcName)
 	if err != nil {
 		return nil, err
 	}
@@ -104,7 +105,7 @@ func (p *parser) functionNode(str string) (*node, error) {
 		return &node{kind: funcNode, funcName: funcName}, nil
 	}
 
-	args := []*node{}
+	var args []*node
 
 	n, err := p.add()
 	if err != nil {
