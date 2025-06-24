@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/c-bata/go-prompt"
-	"github.com/mabego/go-calculator"
 )
 
 func executor(s string) {
@@ -19,7 +18,7 @@ func executor(s string) {
 		os.Exit(0)
 	}
 
-	calc := calculator.New()
+	calc := New()
 
 	val, err := calc.Calculate(s)
 	if err == nil {
@@ -50,7 +49,7 @@ func main() {
 		// Run flag.Parse only for help flags to allow command mode expressions to begin with a negative `-`.
 		flag.Parse()
 	default:
-		calc := calculator.New()
+		calc := New()
 		expression := os.Args[1]
 		result, err := calc.Calculate(expression)
 		if err != nil {
