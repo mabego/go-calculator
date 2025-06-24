@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/c-bata/go-prompt"
-	"github.com/mnogu/go-calculator"
+	"github.com/mabego/go-calculator"
 )
 
 func executor(s string) {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/mnogu/go-calculator"
+	"github.com/mabego/go-calculator"
 )
 
 func main() {

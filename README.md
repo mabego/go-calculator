@@ -1,14 +1,17 @@
 # go-calculator
 
-## Requirements
+## Installation
 
-* Go 1.14+
-  * for [`math.FMA()`](https://golang.org/pkg/math/#FMA)
+```shell
+go install github.com/mabego/go-calculator@latest
+```
 
 ## Usage
 
+### REPL
+
 ```
-$ go run cmd/calculator/main.go
+$ go-calculator
 calculator> (2.5 - 1.35) * 2.0
 2.3
 calculator> -sin((-1+2.5)*pi)
@@ -18,7 +21,19 @@ calculator> 180*atan2(log(e), log10(10))/pi
 calculator> exit
 ```
 
-You can also use `calculator.Calculate()` in your application:
+### Command mode
+
+```
+$ go-calculator "(2.5 - 1.35) * 2.0"
+2.3
+$ go-calculator "-sin((-1+2.5)*pi)"
+1
+$ go-calculator "180*atan2(log(e), log10(10))/pi"
+45
+```
+
+### Library
+
 ```go
 package main
 
@@ -26,7 +41,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/mnogu/go-calculator"
+	"github.com/mabego/go-calculator"
 )
 
 func main() {
@@ -50,6 +65,6 @@ func main() {
 }
 ```
 
-## References
+## Acknowledgements
 
-* [chibicc](https://github.com/rui314/chibicc): A small C compiler
+This project is a fork of [mnogu/go-calculator](https://github.com/mnogu/go-calculator).
