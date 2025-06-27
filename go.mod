@@ -1,4 +1,4 @@
-module github.com/mabego/go-calculator
+module github.com/mabego/gocalc
 
 go 1.24.4
 
