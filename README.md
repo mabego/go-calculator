@@ -1,9 +1,9 @@
-# go-calculator
+# gocalc
 
 ## Installation
 
 ```shell
-go install github.com/mabego/go-calculator@latest
+go install github.com/mabego/gocalc@latest
 ```
 
 ## Usage
@@ -11,27 +11,41 @@ go install github.com/mabego/go-calculator@latest
 ### REPL
 
 ```
-$ go-calculator
-calculator> (2.5 - 1.35) * 2.0
+$ gocalc
+calc> (2.5 - 1.35) * 2.0
 2.3
-calculator> -sin((-1+2.5)*pi)
+calc> -sin((-1+2.5)*pi)
 1
-calculator> 180*atan2(log(e), log10(10))/pi
+calc> 180*atan2(log(e), log10(10))/pi
 45
-calculator> exit
+calc> help
+
+Commands:
+
+help    - Show this help
+clear   - Clear the screen
+exit    - Exit the calculator
+
+calc> exit
 ```
 
 ### Command mode
 
 ```
-$ go-calculator "(2.5 - 1.35) * 2.0"
+$ gocalc "(2.5 - 1.35) * 2.0"
 2.3
-$ go-calculator "-sin((-1+2.5)*pi)"
+$ gocalc "-sin((-1+2.5)*pi)"
 1
-$ go-calculator "180*atan2(log(e), log10(10))/pi"
+$ gocalc "180*atan2(log(e), log10(10))/pi"
 45
 ```
 
 ## Acknowledgements
 
 This project is a fork of [mnogu/go-calculator](https://github.com/mnogu/go-calculator).
+
+## Updates
+
+* Command mode
+* Prompt autocomplete suggestions
+* Refactor for CLI use only
