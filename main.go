@@ -52,12 +52,12 @@ func completer(d prompt.Document) []prompt.Suggest {
 		{Text: "clear", Description: "Clear the screen"},
 	}
 
-	mathFunctions := [49]string{"abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil",
+	mathFunctions := [...]string{"abs", "acos", "acosh", "asin", "asinh", "atan", "atan2", "atanh", "cbrt", "ceil",
 		"copysign", "cos", "cosh", "dim", "erf", "erfc", "erfcinv", "erfinv", "exp", "exp2", "expm1", "fma", "floor",
 		"gamma", "hypot", "j0", "j1", "log", "log10", "log1p", "log2", "logb", "max", "min", "mod", "nan", "nextafter",
 		"pow", "remainder", "round", "roundtoeven", "sin", "sinh", "sqrt", "tan", "tanh", "trunc", "y0", "y1"}
 
-	mathConstants := [11]string{"e", "pi", "phi", "sqrt2", "sqrte", "sqrtpi", "sqrtphi", "ln2", "log2e", "ln10",
+	mathConstants := [...]string{"e", "pi", "phi", "sqrt2", "sqrte", "sqrtpi", "sqrtphi", "ln2", "log2e", "ln10",
 		"log10e"}
 
 	for _, fn := range mathFunctions {
